@@ -7,6 +7,7 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 
+import javax.swing.filechooser.FileSystemView;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -51,7 +52,7 @@ public class GanttChartService {
             Process process;
             if (isWindows) {
                 process = Runtime.getRuntime()
-                        .exec(String.format("cmd /c E: cd %s && mmdc -i gantt.mmd -o gantt.png", this.root));
+                        .exec(String.format("cmd /c cd %s && mmdc -i gantt.mmd -o gantt.png", this.root));
 
             } else {
                 process = Runtime.getRuntime()
