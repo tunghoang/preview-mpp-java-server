@@ -5,6 +5,8 @@ mvnw.cmd
 target/
 gantt-chart/
 uploads/
+node_modules/
+docker-compose.yml
 
 ### Git ###
 .gitignore

@@ -1,13 +1,5 @@
 package dev.webServer.service;
 
-import dev.webServer.model.Project;
-import dev.webServer.model.Task;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtilities;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.IntervalCategoryDataset;
-import org.jfree.data.gantt.TaskSeries;
-import org.jfree.data.gantt.TaskSeriesCollection;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -21,8 +13,8 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 @Service
-public class GanttChartService {
-    private final Path root = Paths.get("gantt-chart");
+public class DataStorageService {
+    private final Path root = Paths.get("data");
 
     public void init() {
         try {
@@ -31,44 +23,6 @@ public class GanttChartService {
             System.out.println("Warning: " + e.getMessage() + " folder has been initialized! ");
         }
     }
-
-    public void convertToImage(Project jsonProject) {
-        IntervalCategoryDataset dataset = getCategoryDataset(jsonProject);
-        JFreeChart chart = ChartFactory.createGanttChart(
-                jsonProject.getProjectTitle(),
-                "Software Development Phases",
-                "Timeline",
-                dataset, true, true
-                , true);
-        try {
-            OutputStream out = new FileOutputStream("gantt-chart/gantt.png");
-            ChartUtilities.writeChartAsPNG(out,
-                    chart,
-                    1000,
-                    1000);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    private IntervalCategoryDataset getCategoryDataset(Project jsonProject) {
-        TaskSeries series_1 = new TaskSeries("Summary");
-        TaskSeries series_2 = new TaskSeries("Task");
-        TaskSeriesCollection dataset = new TaskSeriesCollection();
-        for (Task task : jsonProject.getTasks()) {
-            if (task.getId() == 0) {
-                series_1.add(new org.jfree.data.gantt.Task(task.getName(), task.getStart(), task.getFinish()));
-            } else {
-                series_2.add(new org.jfree.data.gantt.Task(task.getName(), task.getStart(), task.getFinish()));
-            }
-        }
-        dataset.add(series_1);
-        dataset.add(series_2);
-
-        return dataset;
-    }
-
 
     public Resource load(String filename) {
         try {

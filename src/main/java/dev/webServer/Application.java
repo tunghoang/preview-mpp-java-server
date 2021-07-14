@@ -1,6 +1,6 @@
 package dev.webServer;
 import dev.webServer.service.FilesStorageService;
-import dev.webServer.service.GanttChartService;
+import dev.webServer.service.DataStorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +13,7 @@ public class Application implements CommandLineRunner {
     @Resource
     FilesStorageService storageService;
     @Resource
-    GanttChartService ganttChartService;
+    DataStorageService dataStorageService;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -22,7 +22,7 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... arg) throws Exception {
         storageService.init();
-        ganttChartService.init();
+        dataStorageService.init();
     }
 
 
