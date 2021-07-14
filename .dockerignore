@@ -1,0 +1,23 @@
+HELP.md
+mvnw
+mvnw.cmd
+.mvn/
+target/
+gantt-chart/
+uploads/
+
+### Git ###
+.gitignore
+.git/
+
+### IntelliJ IDEA ###
+*.iml
+.idea/
+
+### VS Code ###
+.vscode/
+
+
+
+
+

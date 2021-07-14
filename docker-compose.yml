@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  java-server:
+    image: java-server:v0.0.2
+    volumes:
+     - java-server: /var/cache/folder
+    ports:
+       8080:8080
+  table-renderer-service:
+    image: table-service:v0.0.1
+    ports:
+       8081:8081
+volumes:
+  java-server:
+	
